@@ -10,11 +10,7 @@ spec:
   source:
     repoURL: https://github.com/bjethwan/platform-k8s-components
     targetRevision: HEAD
-    path: ingress-nginx-previous
+    path: ingress-nginx-new
   destination:
     namespace: ingress-nginx
     server: https://kubernetes.default.svc
-  syncPolicy:
-    automated:
-      selfHeal: true
-      prune: true
