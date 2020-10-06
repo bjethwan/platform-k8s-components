@@ -6,22 +6,14 @@ metadata:
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
-  project: {{ .Values.project }}
+  project: default
   source:
-    repoURL: 
-    
-      parameters:
-      - name:  service.type
-        value: LoadBalancer
-      - name: ingressClass
-        value: devtest
-      valueFiles:
-      - values.yaml
-    repoURL: https://kubernetes-charts.storage.googleapis.com/
-    targetRevision: 1.34.2
+    repoURL: https://github.com/bjethwan/platform-k8s-components
+    targetRevision: HEAD
+    path: ingress-nginx
   destination:
     namespace: ingress-nginx
-    server: {{ .Values.cluster }}
+    server: https://kubernetes.default.svc
   syncPolicy:
     automated:
       selfHeal: true
