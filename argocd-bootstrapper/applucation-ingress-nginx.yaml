@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: https://github.com/bjethwan/platform-k8s-components
     targetRevision: HEAD
-    path: ingress-nginx
+    path: ingress-nginx/overlays/sandbox
   destination:
     namespace: ingress-nginx
     server: https://kubernetes.default.svc

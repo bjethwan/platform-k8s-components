@@ -6,7 +6,9 @@ metadata:
   name: nginx-ingress-lb
   namespace: kube-system
 spec:
-  replicas: 1
+  progressDeadlineSeconds: 600
+  replicas: 3
+  revisionHistoryLimit: 10
   selector:
     matchLabels:
       name: nginx-ingress-lb
@@ -20,7 +22,6 @@ spec:
       labels:
         name: nginx-ingress-lb
     spec:
-      serviceAccountName: nginx-ingress-serviceaccount
       containers:
       - args:
         - /nginx-ingress-controller
@@ -80,4 +81,6 @@ spec:
       restartPolicy: Always
       schedulerName: default-scheduler
       securityContext: {}
+      serviceAccount: nginx-ingress-serviceaccount
+      serviceAccountName: nginx-ingress-serviceaccount      
       terminationGracePeriodSeconds: 60

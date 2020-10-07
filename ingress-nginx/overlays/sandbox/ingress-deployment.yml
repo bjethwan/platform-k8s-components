@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    name: nginx-ingress-lb
+  name: nginx-ingress-lb
+  namespace: kube-system
+spec:
+  replicas: 3
+  template:
+    spec:
+      $setElementOrder/containers:
+      - name: nginx-ingress-lb
+      containers:
+      - name: nginx-ingress-lb
+        resources:
+          limits:
+            memory: 100Mi
+          requests:
+            memory: 100Mi

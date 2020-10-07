@@ -1,6 +1,8 @@
 apiVersion: v1
 kind: ReplicationController
 metadata:
+  labels:
+    app: default-http-backend
   name: default-http-backend
   namespace: kube-system
 spec:
@@ -11,23 +13,24 @@ spec:
     metadata:
       labels:
         app: default-http-backend
-    spec:
-      terminationGracePeriodSeconds: 60      
+    spec:  
       containers:
-      - name: default-http-backend
-        # Any image is permissable as long as:
-        # 1. It serves a 404 page at /
-        # 2. It serves 200 on a /healthz endpoint
-        image: gcr.io/google_containers/defaultbackend:1.4
+      - image: gcr.io/google_containers/defaultbackend:1.4
+        imagePullPolicy: IfNotPresent
         livenessProbe:
+          failureThreshold: 3
           httpGet:
             path: /healthz
             port: 8080
             scheme: HTTP
           initialDelaySeconds: 30
+          periodSeconds: 10
+          successThreshold: 1
           timeoutSeconds: 5
+        name: default-http-backend
         ports:
         - containerPort: 8080
+          protocol: TCP
         resources:
           limits:
             cpu: 10m
