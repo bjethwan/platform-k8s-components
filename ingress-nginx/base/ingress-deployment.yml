@@ -30,6 +30,7 @@ spec:
         - --udp-services-configmap=kube-system/ingress-udp-configmap
         - --annotations-prefix=ingress.kubernetes.io
         - --enable-ssl-passthrough
+        - --enable-metrics
         env:
         - name: POD_NAME
           valueFrom:
